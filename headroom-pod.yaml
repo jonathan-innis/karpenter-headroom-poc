@@ -1,0 +1,35 @@
+# Missing use cases
+# * Dynamic Headroom -- do we need an autoscaler?
+
+apiVersion: apps.kubernetes.io/v1
+kind: Headroom
+metadata:
+  name: pods
+spec:
+  satisfiedBy:
+    matchLabels:
+      app: inflate
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        headroom: pods
+    spec:
+      containers:
+        - cpu: 1
+          memory: 1Gi
+      topologySpreadConstraints:
+        - maxSkew: 1
+          minDomains: 3
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              headroom: pods
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                headroom: pods
