@@ -1,13 +1,16 @@
-# Represent overhead capacity for pods by simulating Headroom pods
-# SatisfiedBy is not included here since this capacity will always be used as warm pool capacity
-# on top of existing cluster capacity and won't be used up by pods
+# Represent static capacity for pods by selecting against specific pods to fill-up
+# the capacity. The capacity is marked as available when a scheduling simulation sees that all of the pods
+# in Headroom have been successfully simulated pods would be eligible for scheduling
 apiVersion: apps.kubernetes.io/v1
 kind: Headroom
 metadata:
-  name: pods
+  name: nodes
   namespace: default
 spec:
   replicas: 3
+  satisfiedBy:
+    matchLabels:
+      app: inflate
   template:
     metadata:
       labels:

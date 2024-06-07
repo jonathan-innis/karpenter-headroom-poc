@@ -1,6 +1,6 @@
-# Represent overhead capacity for nodes by simulating Headroom pods that use antiAffinity and spread across zones
-# SatisfiedBy is not included here since this capacity will always be used as warm pool capacity
-# on top of existing cluster capacity and won't be used up by pods
+# Represent static capacity for nodes by selecting against all pods
+# using the satisfiedBy field. podAntiAffinity and topologySpreadConstraints are used to 
+# request 3 m5.large instances spread across zones
 apiVersion: apps.kubernetes.io/v1
 kind: Headroom
 metadata:
@@ -8,6 +8,12 @@ metadata:
   namespace: default
 spec:
   replicas: 3
+  satisfiedBy:
+    matchFields:
+      - key: metadata.name
+        operator: Exists
+      - key: metadata.namespace
+        operator: Exists
   template:
     metadata:
       labels:

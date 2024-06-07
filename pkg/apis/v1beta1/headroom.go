@@ -72,7 +72,4 @@ type PodSelector struct {
 	// MatchFields is a list of selector requirements by fields
 	// +optional
 	MatchFields metav1.LabelSelectorRequirement `json:"matchFields,omitempty"`
-	// Namespace allows you to constrain the selector to a specific namespace
-	// +optional
-	Namespace string `json:"namespace,omitempty"`
 }
