@@ -1,8 +1,8 @@
 # Represent static capacity for nodes by selecting against all pods
 # using the satisfiedBy field. podAntiAffinity and topologySpreadConstraints are used to 
 # request 3 m5.large instances spread across zones
-apiVersion: apps.kubernetes.io/v1
-kind: Headroom
+apiVersion: apps.kubernetes.io/v1alpha1
+kind: PodHeadroom
 metadata:
   name: nodes
   namespace: default

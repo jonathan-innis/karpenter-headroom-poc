@@ -1,8 +1,8 @@
-# Represent overhead capacity for nodes by simulating Headroom pods that use antiAffinity and spread across zones
+# Represent overhead capacity for nodes by simulating PodHeadroom pods that use antiAffinity and spread across zones
 # SatisfiedBy is not included here since this capacity will always be used as warm pool capacity
 # on top of existing cluster capacity and won't be used up by pods
-apiVersion: apps.kubernetes.io/v1
-kind: Headroom
+apiVersion: apps.kubernetes.io/v1alpha1
+kind: PodHeadroom
 metadata:
   name: nodes
   namespace: default

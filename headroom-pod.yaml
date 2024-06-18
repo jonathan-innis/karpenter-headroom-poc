@@ -1,8 +1,8 @@
-# Represent overhead capacity for pods by simulating Headroom pods
+# Represent overhead capacity for pods by simulating PodHeadroom pods
 # SatisfiedBy is not included here since this capacity will always be used as warm pool capacity
 # on top of existing cluster capacity and won't be used up by pods
-apiVersion: apps.kubernetes.io/v1
-kind: Headroom
+apiVersion: apps.kubernetes.io/v1alpha1
+kind: PodHeadroom
 metadata:
   name: pods
   namespace: default
